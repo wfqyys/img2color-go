@@ -1,4 +1,11 @@
 {
+  "version": 2,
+  "builds": [
+    {
+      "src": "app/api/img2color.go",
+      "use": "@vercel/go"
+    }
+  ],
   "rewrites": [
     {
       "source": "/api",
