@@ -93,7 +93,7 @@ cp .env.example .env
 #### 5. 运行服务
 
 ```bash
-go run main.go
+go run app/main.go
 ```
 
 服务将在配置的端口（默认3000）启动。
@@ -222,22 +222,23 @@ ALLOWED_REFERERS=example.com,*.example.com
 
 ```
 img2color-go/
-├── api/
-│   └── img2color.go      # Vercel入口
-├── internal/             # 内部包（不会被Vercel扫描）
-│   ├── config/          # 配置管理
-│   ├── handler/         # HTTP处理器
-│   ├── pkg/             # 公共工具包
-│   │   ├── errorx/      # 错误处理
-│   │   ├── logger/      # 日志
-│   │   └── httputil/    # HTTP工具
-│   ├── service/         # 业务服务
-│   └── storage/         # 存储层
-├── main.go              # 本地运行入口
-├── .env.example         # 环境变量模板
-├── vercel.json          # Vercel配置
-├── go.mod               # Go模块定义
-└── README.md            # 项目文档
+├── app/                  # 应用代码（独立模块）
+│   ├── main.go           # 本地运行入口
+│   ├── api/
+│   │   └── img2color.go  # Vercel入口
+│   └── internal/         # 内部包（符合Go最佳实践）
+│       ├── config/       # 配置管理
+│       ├── handler/      # HTTP处理器
+│       ├── pkg/          # 公共工具包
+│       │   ├── errorx/   # 错误处理
+│       │   ├── logger/   # 日志
+│       │   └── httputil/ # HTTP工具
+│       ├── service/      # 业务服务
+│       └── storage/      # 存储层
+├── .env.example          # 环境变量模板
+├── vercel.json           # Vercel配置
+├── go.mod                # Go模块定义
+└── README.md             # 项目文档
 ```
 
 ## 常见问题

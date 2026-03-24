@@ -1,22 +1,17 @@
-package handler
+package main
 
 import (
 	"log"
 	"net/http"
 
-	"img2color-go/internal/config"
-	"img2color-go/internal/handler"
-	"img2color-go/internal/pkg/logger"
-	"img2color-go/internal/service"
-	"img2color-go/internal/storage"
+	"img2color-go/app/internal/config"
+	"img2color-go/app/internal/handler"
+	"img2color-go/app/internal/pkg/logger"
+	"img2color-go/app/internal/service"
+	"img2color-go/app/internal/storage"
 )
 
-var (
-	apiHandler    http.Handler
-	healthHandler http.Handler
-)
-
-func init() {
+func main() {
 	// 加载配置
 	cfg, err := config.Load()
 	if err != nil {
@@ -50,15 +45,15 @@ func init() {
 	extractor := service.NewColorExtractor(cfg.Image.MaxSize, cache, mongoStorage)
 
 	// 创建处理器
-	h := handler.NewHandler(extractor, cfg.Image.DownloadTimeout)
-	hh := handler.NewHealthHandler(cache, mongoStorage)
+	apiHandler := handler.NewHandler(extractor, cfg.Image.DownloadTimeout)
+	healthHandler := handler.NewHealthHandler(cache, mongoStorage)
 
 	// 创建速率限制器
 	limiter := handler.NewRateLimiter(cfg.Security.RateLimit, cfg.Security.RateWindow)
 
-	// 创建API处理器中间件链（在init中创建，避免每次请求都创建）
-	apiHandler = handler.Chain(
-		h,
+	// 创建API处理器中间件链
+	apiChain := handler.Chain(
+		apiHandler,
 		handler.LoggingMiddleware(),
 		handler.RateLimitMiddleware(limiter),
 		handler.RefererMiddleware(cfg.Security.AllowedReferers),
@@ -66,21 +61,27 @@ func init() {
 	)
 
 	// 创建健康检查处理器中间件链
-	healthHandler = handler.Chain(
-		hh,
+	healthChain := handler.Chain(
+		healthHandler,
 		handler.LoggingMiddleware(),
 		handler.CORSMiddleware(cfg.Security.AllowedOrigins),
 	)
 
-	logger.Info("服务初始化完成")
-}
+	// 注册路由
+	http.Handle("/api", apiChain)
+	http.Handle("/health", healthChain)
 
-// Handler Vercel入口函数 - API接口
-func Handler(w http.ResponseWriter, r *http.Request) {
-	// 根据路径判断是API还是健康检查
-	if r.URL.Path == "/health" {
-		healthHandler.ServeHTTP(w, r)
-		return
+	// 获取端口
+	port := cfg.Server.Port
+	if port == "" {
+		port = "3000"
 	}
-	apiHandler.ServeHTTP(w, r)
+
+	logger.Info("服务器启动，监听端口: %s", port)
+	log.Printf("服务器监听在 :%s...\n", port)
+
+	// 启动服务器
+	if err := http.ListenAndServe(":"+port, nil); err != nil {
+		log.Fatalf("服务器启动失败: %v", err)
+	}
 }

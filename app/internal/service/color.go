@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"image"
 
-	"img2color-go/internal/pkg/errorx"
-	"img2color-go/internal/pkg/logger"
+	"img2color-go/app/internal/pkg/errorx"
+	"img2color-go/app/internal/pkg/logger"
 
 	"github.com/disintegration/imaging"
 	"github.com/lucasb-eyer/go-colorful"
@@ -102,4 +102,6 @@ func (s *ColorService) calculateAverageColor(img image.Image) string {
 
 	return mainColor.Hex()
 }
+
+
 

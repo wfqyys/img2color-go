@@ -1,4 +1,4 @@
-package errorx
+﻿package errorx
 
 import (
 	"errors"
@@ -124,3 +124,4 @@ func TestPredefinedErrors(t *testing.T) {
 		})
 	}
 }
+

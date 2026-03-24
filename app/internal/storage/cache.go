@@ -1,4 +1,4 @@
-package storage
+﻿package storage
 
 import "context"
 
@@ -41,3 +41,4 @@ func (c *NopCache) Delete(ctx context.Context, key string) error {
 func (c *NopCache) Close() error {
 	return nil
 }
+

@@ -6,8 +6,8 @@ import (
 	"encoding/base64"
 	"time"
 
-	"img2color-go/internal/pkg/logger"
-	"img2color-go/internal/storage"
+	"img2color-go/app/internal/pkg/logger"
+	"img2color-go/app/internal/storage"
 )
 
 // ColorExtractor 颜色提取器
@@ -90,4 +90,6 @@ func (e *ColorExtractor) ExtractWithTimeout(imgURL string, timeout time.Duration
 	defer cancel()
 	return e.Extract(ctx, imgURL)
 }
+
+
 

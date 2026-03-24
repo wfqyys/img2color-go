@@ -2,15 +2,15 @@
   "rewrites": [
     {
       "source": "/api",
-      "destination": "/api/img2color.go"
+      "destination": "/app/api/img2color.go"
     },
     {
       "source": "/health",
-      "destination": "/api/img2color.go"
+      "destination": "/app/api/img2color.go"
     }
   ],
   "functions": {
-    "api/img2color.go": {
+    "app/api/img2color.go": {
       "maxDuration": 10
     }
   },

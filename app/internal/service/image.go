@@ -6,9 +6,9 @@ import (
 	"io"
 	"net/http"
 
-	"img2color-go/internal/pkg/errorx"
-	"img2color-go/internal/pkg/httputil"
-	"img2color-go/internal/pkg/logger"
+	"img2color-go/app/internal/pkg/errorx"
+	"img2color-go/app/internal/pkg/httputil"
+	"img2color-go/app/internal/pkg/logger"
 )
 
 // ImageService 图片服务
@@ -75,4 +75,6 @@ func (s *ImageService) Download(ctx context.Context, url string) ([]byte, error)
 	logger.Info("图片下载成功，大小: %d 字节", n)
 	return buf.Bytes(), nil
 }
+
+
 

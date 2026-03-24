@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"img2color-go/internal/pkg/logger"
+	"img2color-go/app/internal/pkg/logger"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -104,4 +104,6 @@ func (s *MongoDBStorage) Close() error {
 func (s *MongoDBStorage) IsEnabled() bool {
 	return s.enabled
 }
+
+
 

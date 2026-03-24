@@ -3,7 +3,7 @@
 import (
 	"testing"
 
-	"img2color-go/internal/pkg/errorx"
+	"img2color-go/app/internal/pkg/errorx"
 )
 
 func TestValidator_ValidateURL(t *testing.T) {
@@ -158,4 +158,6 @@ func TestValidator_isPrivateIP(t *testing.T) {
 		})
 	}
 }
+
+
 

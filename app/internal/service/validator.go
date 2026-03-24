@@ -5,7 +5,7 @@ import (
 	"net/url"
 	"strings"
 
-	"img2color-go/internal/pkg/errorx"
+	"img2color-go/app/internal/pkg/errorx"
 )
 
 // Validator URL验证器
@@ -171,4 +171,6 @@ func (v *Validator) isPrivateIP(ip net.IP) bool {
 
 	return false
 }
+
+
 

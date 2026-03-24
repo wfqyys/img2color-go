@@ -1,13 +1,13 @@
-package handler
+﻿package handler
 
 import (
 	"encoding/json"
 	"net/http"
 	"time"
 
-	"img2color-go/internal/pkg/errorx"
-	"img2color-go/internal/pkg/logger"
-	"img2color-go/internal/service"
+	"img2color-go/app/internal/pkg/errorx"
+	"img2color-go/app/internal/pkg/logger"
+	"img2color-go/app/internal/service"
 )
 
 // Handler API处理器
@@ -65,3 +65,5 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 func (h *Handler) HandleImageColor(w http.ResponseWriter, r *http.Request) {
 	h.ServeHTTP(w, r)
 }
+
+

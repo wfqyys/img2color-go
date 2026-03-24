@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"img2color-go/internal/pkg/logger"
+	"img2color-go/app/internal/pkg/logger"
 
 	"github.com/go-redis/redis/v8"
 )
@@ -116,4 +116,6 @@ func (c *RedisCache) Close() error {
 	}
 	return c.client.Close()
 }
+
+
 

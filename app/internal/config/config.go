@@ -1,4 +1,4 @@
-package config
+﻿package config
 
 import (
 	"fmt"
@@ -226,3 +226,4 @@ func parseStringSlice(value string) []string {
 	}
 	return result
 }
+

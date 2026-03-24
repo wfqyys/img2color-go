@@ -1,4 +1,4 @@
-package service
+﻿package service
 
 import (
 	"bytes"
@@ -96,3 +96,4 @@ func createTestImage(width, height int, c color.RGBA) image.Image {
 func encodePNG(w *bytes.Buffer, img image.Image) error {
 	return png.Encode(w, img)
 }
+

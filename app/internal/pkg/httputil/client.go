@@ -1,4 +1,4 @@
-package httputil
+﻿package httputil
 
 import (
 	"net/http"
@@ -78,3 +78,4 @@ func CreateRequest(method, url string) (*http.Request, error) {
 	req.Header.Set("User-Agent", CreateUserAgent())
 	return req, nil
 }
+

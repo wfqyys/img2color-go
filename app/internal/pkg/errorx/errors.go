@@ -1,4 +1,4 @@
-package errorx
+﻿package errorx
 
 import (
 	"encoding/json"
@@ -165,3 +165,4 @@ func New(code, message string, httpStatus int) *AppError {
 		HTTPStatus: httpStatus,
 	}
 }
+

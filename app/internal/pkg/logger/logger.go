@@ -1,4 +1,4 @@
-package logger
+﻿package logger
 
 import (
 	"fmt"
@@ -118,3 +118,4 @@ func Error(format string, args ...interface{}) {
 func SetLevel(level LogLevel) {
 	GetLogger().SetLevel(level)
 }
+
