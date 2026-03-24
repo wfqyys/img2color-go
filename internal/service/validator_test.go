@@ -1,9 +1,9 @@
-package service
+﻿package service
 
 import (
 	"testing"
 
-	"img2color-go/api/pkg/errorx"
+	"img2color-go/internal/pkg/errorx"
 )
 
 func TestValidator_ValidateURL(t *testing.T) {
@@ -158,3 +158,4 @@ func TestValidator_isPrivateIP(t *testing.T) {
 		})
 	}
 }
+

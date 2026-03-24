@@ -1,4 +1,4 @@
-package handler
+﻿package handler
 
 import (
 	"context"
@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"time"
 
-	"img2color-go/api/pkg/logger"
-	"img2color-go/api/storage"
+	"img2color-go/internal/pkg/logger"
+	"img2color-go/internal/storage"
 )
 
 // HealthHandler 健康检查处理器
@@ -110,3 +110,4 @@ func (h *HealthHandler) checkMongoDB() map[string]interface{} {
 	status["status"] = "ok"
 	return status
 }
+

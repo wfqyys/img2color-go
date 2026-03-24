@@ -1,4 +1,4 @@
-package service
+﻿package service
 
 import (
 	"context"
@@ -6,8 +6,8 @@ import (
 	"encoding/base64"
 	"time"
 
-	"img2color-go/api/pkg/logger"
-	"img2color-go/api/storage"
+	"img2color-go/internal/pkg/logger"
+	"img2color-go/internal/storage"
 )
 
 // ColorExtractor 颜色提取器
@@ -90,3 +90,4 @@ func (e *ColorExtractor) ExtractWithTimeout(imgURL string, timeout time.Duration
 	defer cancel()
 	return e.Extract(ctx, imgURL)
 }
+

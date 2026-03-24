@@ -223,26 +223,16 @@ ALLOWED_REFERERS=example.com,*.example.com
 ```
 img2color-go/
 ├── api/
+│   └── img2color.go      # Vercel入口
+├── internal/             # 内部包（不会被Vercel扫描）
 │   ├── config/          # 配置管理
-│   │   └── config.go
 │   ├── handler/         # HTTP处理器
-│   │   ├── handler.go
-│   │   ├── health.go
-│   │   └── middleware.go
 │   ├── pkg/             # 公共工具包
 │   │   ├── errorx/      # 错误处理
 │   │   ├── logger/      # 日志
 │   │   └── httputil/    # HTTP工具
 │   ├── service/         # 业务服务
-│   │   ├── color.go
-│   │   ├── extractor.go
-│   │   ├── image.go
-│   │   └── validator.go
-│   ├── storage/         # 存储层
-│   │   ├── cache.go
-│   │   ├── mongodb.go
-│   │   └── redis.go
-│   └── img2color.go      # Vercel入口
+│   └── storage/         # 存储层
 ├── main.go              # 本地运行入口
 ├── .env.example         # 环境变量模板
 ├── vercel.json          # Vercel配置

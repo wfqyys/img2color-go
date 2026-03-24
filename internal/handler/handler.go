@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"time"
 
-	"img2color-go/api/pkg/errorx"
-	"img2color-go/api/pkg/logger"
-	"img2color-go/api/service"
+	"img2color-go/internal/pkg/errorx"
+	"img2color-go/internal/pkg/logger"
+	"img2color-go/internal/service"
 )
 
 // Handler API处理器

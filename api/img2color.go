@@ -4,11 +4,11 @@ import (
 	"log"
 	"net/http"
 
-	"img2color-go/api/config"
-	"img2color-go/api/handler"
-	"img2color-go/api/pkg/logger"
-	"img2color-go/api/service"
-	"img2color-go/api/storage"
+	"img2color-go/internal/config"
+	"img2color-go/internal/handler"
+	"img2color-go/internal/pkg/logger"
+	"img2color-go/internal/service"
+	"img2color-go/internal/storage"
 )
 
 var (
@@ -77,5 +77,10 @@ func init() {
 
 // Handler Vercel入口函数 - API接口
 func Handler(w http.ResponseWriter, r *http.Request) {
+	// 根据路径判断是API还是健康检查
+	if r.URL.Path == "/health" {
+		healthHandler.ServeHTTP(w, r)
+		return
+	}
 	apiHandler.ServeHTTP(w, r)
 }

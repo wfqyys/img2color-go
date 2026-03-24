@@ -4,11 +4,11 @@ import (
 	"log"
 	"net/http"
 
-	"img2color-go/api/config"
-	"img2color-go/api/handler"
-	"img2color-go/api/pkg/logger"
-	"img2color-go/api/service"
-	"img2color-go/api/storage"
+	"img2color-go/internal/config"
+	"img2color-go/internal/handler"
+	"img2color-go/internal/pkg/logger"
+	"img2color-go/internal/service"
+	"img2color-go/internal/storage"
 )
 
 func main() {
