@@ -1,4 +1,4 @@
-package handler
+package main
 
 import (
 	"log"
@@ -11,13 +11,7 @@ import (
 	"img2color-go/api/storage"
 )
 
-var (
-	apiHandler    *handler.Handler
-	healthHandler *handler.HealthHandler
-	limiter       *handler.RateLimiter
-)
-
-func init() {
+func main() {
 	// 加载配置
 	cfg, err := config.Load()
 	if err != nil {
@@ -51,21 +45,14 @@ func init() {
 	extractor := service.NewColorExtractor(cfg.Image.MaxSize, cache, mongoStorage)
 
 	// 创建处理器
-	apiHandler = handler.NewHandler(extractor, cfg.Image.DownloadTimeout)
-	healthHandler = handler.NewHealthHandler(cache, mongoStorage)
+	apiHandler := handler.NewHandler(extractor, cfg.Image.DownloadTimeout)
+	healthHandler := handler.NewHealthHandler(cache, mongoStorage)
 
 	// 创建速率限制器
-	limiter = handler.NewRateLimiter(cfg.Security.RateLimit, cfg.Security.RateWindow)
+	limiter := handler.NewRateLimiter(cfg.Security.RateLimit, cfg.Security.RateWindow)
 
-	logger.Info("服务初始化完成")
-}
-
-// Handler Vercel入口函数 - API接口
-func Handler(w http.ResponseWriter, r *http.Request) {
-	cfg := config.GetConfig()
-
-	// 创建中间件链
-	middlewareChain := handler.Chain(
+	// 创建API处理器中间件链
+	apiChain := handler.Chain(
 		apiHandler,
 		handler.LoggingMiddleware(),
 		handler.RateLimitMiddleware(limiter),
@@ -73,19 +60,28 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		handler.CORSMiddleware(cfg.Security.AllowedOrigins),
 	)
 
-	middlewareChain.ServeHTTP(w, r)
-}
-
-// HealthHandler Vercel入口函数 - 健康检查
-func HealthHandler(w http.ResponseWriter, r *http.Request) {
-	cfg := config.GetConfig()
-
-	// 创建中间件链
-	middlewareChain := handler.Chain(
+	// 创建健康检查处理器中间件链
+	healthChain := handler.Chain(
 		healthHandler,
 		handler.LoggingMiddleware(),
 		handler.CORSMiddleware(cfg.Security.AllowedOrigins),
 	)
 
-	middlewareChain.ServeHTTP(w, r)
+	// 注册路由
+	http.Handle("/api", apiChain)
+	http.Handle("/health", healthChain)
+
+	// 获取端口
+	port := cfg.Server.Port
+	if port == "" {
+		port = "3000"
+	}
+
+	logger.Info("服务器启动，监听端口: %s", port)
+	log.Printf("服务器监听在 :%s...\n", port)
+
+	// 启动服务器
+	if err := http.ListenAndServe(":"+port, nil); err != nil {
+		log.Fatalf("服务器启动失败: %v", err)
+	}
 }
