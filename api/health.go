@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-// Handler Vercel入口函数 - API接口
+// Handler Vercel入口函数 - 健康检查
 func Handler(w http.ResponseWriter, r *http.Request) {
-	apiHandler.ServeHTTP(w, r)
+	healthHandler.ServeHTTP(w, r)
 }

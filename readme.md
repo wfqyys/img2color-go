@@ -242,7 +242,9 @@ img2color-go/
 │   │   ├── cache.go
 │   │   ├── mongodb.go
 │   │   └── redis.go
-│   └── img2color.go     # Vercel入口
+│   ├── index.go          # 初始化逻辑
+│   ├── img2color.go      # Vercel入口 - API
+│   └── health.go         # Vercel入口 - 健康检查
 ├── main.go              # 本地运行入口
 ├── .env.example         # 环境变量模板
 ├── vercel.json          # Vercel配置
