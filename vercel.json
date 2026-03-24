@@ -6,11 +6,11 @@
     },
     {
       "source": "/health",
-      "destination": "/api/health.go"
+      "destination": "/api/img2color.go"
     }
   ],
   "functions": {
-    "api/*.go": {
+    "api/img2color.go": {
       "maxDuration": 10
     }
   },

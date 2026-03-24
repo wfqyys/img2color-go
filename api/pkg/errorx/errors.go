@@ -113,8 +113,8 @@ type ErrorResponse struct {
 	Message string `json:"message"`
 }
 
-// WriteError 写入错误响应
-func WriteError(w http.ResponseWriter, err error) {
+// writeErrorResponse 写入错误响应（内部函数）
+func writeErrorResponse(w http.ResponseWriter, err error) {
 	appErr, ok := err.(*AppError)
 	if !ok {
 		// 如果不是AppError，包装为内部服务器错误
@@ -134,6 +134,9 @@ func WriteError(w http.ResponseWriter, err error) {
 	}
 	json.NewEncoder(w).Encode(response)
 }
+
+// WriteError 写入错误响应（公开函数，用于中间件和处理器）
+var WriteError = writeErrorResponse
 
 // Wrap 包装错误
 func Wrap(err *AppError, cause error) *AppError {
