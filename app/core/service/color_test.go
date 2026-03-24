@@ -97,3 +97,4 @@ func encodePNG(w *bytes.Buffer, img image.Image) error {
 	return png.Encode(w, img)
 }
 
+

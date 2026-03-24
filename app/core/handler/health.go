@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"time"
 
-	"img2color-go/app/internal/pkg/logger"
-	"img2color-go/app/internal/storage"
+	"img2color-go/app/core/pkg/logger"
+	"img2color-go/app/core/storage"
 )
 
 // HealthHandler 健康检查处理器
@@ -110,6 +110,7 @@ func (h *HealthHandler) checkMongoDB() map[string]interface{} {
 	status["status"] = "ok"
 	return status
 }
+
 
 
 

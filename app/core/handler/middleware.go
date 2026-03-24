@@ -7,8 +7,8 @@ import (
 	"sync"
 	"time"
 
-	"img2color-go/app/internal/pkg/errorx"
-	"img2color-go/app/internal/pkg/logger"
+	"img2color-go/app/core/pkg/errorx"
+	"img2color-go/app/core/pkg/logger"
 )
 
 // Middleware 中间件类型
@@ -260,6 +260,7 @@ func (rw *responseWriter) WriteHeader(statusCode int) {
 	rw.statusCode = statusCode
 	rw.ResponseWriter.WriteHeader(statusCode)
 }
+
 
 
 

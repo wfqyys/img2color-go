@@ -119,3 +119,4 @@ func SetLevel(level LogLevel) {
 	GetLogger().SetLevel(level)
 }
 
+

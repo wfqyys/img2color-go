@@ -1,14 +1,14 @@
-package main
+﻿package main
 
 import (
 	"log"
 	"net/http"
 
-	"img2color-go/app/internal/config"
-	"img2color-go/app/internal/handler"
-	"img2color-go/app/internal/pkg/logger"
-	"img2color-go/app/internal/service"
-	"img2color-go/app/internal/storage"
+	"img2color-go/app/core/config"
+	"img2color-go/app/core/handler"
+	"img2color-go/app/core/pkg/logger"
+	"img2color-go/app/core/service"
+	"img2color-go/app/core/storage"
 )
 
 func main() {
@@ -85,3 +85,4 @@ func main() {
 		log.Fatalf("服务器启动失败: %v", err)
 	}
 }
+

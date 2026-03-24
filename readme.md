@@ -222,11 +222,11 @@ ALLOWED_REFERERS=example.com,*.example.com
 
 ```
 img2color-go/
-├── app/                  # 应用代码（独立模块）
+├── api/
+│   └── img2color.go      # Vercel入口
+├── app/                  # 应用代码
 │   ├── main.go           # 本地运行入口
-│   ├── api/
-│   │   └── img2color.go  # Vercel入口
-│   └── internal/         # 内部包（符合Go最佳实践）
+│   └── core/             # 核心业务代码
 │       ├── config/       # 配置管理
 │       ├── handler/      # HTTP处理器
 │       ├── pkg/          # 公共工具包

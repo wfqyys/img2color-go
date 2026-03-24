@@ -166,3 +166,4 @@ func New(code, message string, httpStatus int) *AppError {
 	}
 }
 
+

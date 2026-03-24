@@ -1,23 +1,16 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "app/api/img2color.go",
-      "use": "@vercel/go"
-    }
-  ],
   "rewrites": [
     {
       "source": "/api",
-      "destination": "/app/api/img2color.go"
+      "destination": "/api/img2color.go"
     },
     {
       "source": "/health",
-      "destination": "/app/api/img2color.go"
+      "destination": "/api/img2color.go"
     }
   ],
   "functions": {
-    "app/api/img2color.go": {
+    "api/img2color.go": {
       "maxDuration": 10
     }
   },
